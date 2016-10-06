@@ -13,19 +13,20 @@
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="utilities" Type="Folder">
 			<Item Name="Append Value To Waveform.vi" Type="VI" URL="../helpers/Append Value To Waveform.vi"/>
-			<Item Name="Build IPK.vi" Type="VI" URL="../ipkgbuilder/Build IPK.vi"/>
-			<Item Name="Package Name.vi" Type="VI" URL="../ipkgbuilder/Package Name.vi"/>
-			<Item Name="Package Directory.vi" Type="VI" URL="../ipkgbuilder/Package Directory.vi"/>
-			<Item Name="Package Payload.vi" Type="VI" URL="../ipkgbuilder/Package Payload.vi"/>
-			<Item Name="Control File.vi" Type="VI" URL="../ipkgbuilder/Control File.vi"/>
 			<Item Name="Get System Channels.vi" Type="VI" URL="../helpers/Get System Channels.vi"/>
 			<Item Name="Get Channel Waveform Path.vi" Type="VI" URL="../helpers/Get Channel Waveform Path.vi"/>
 			<Item Name="Update Available Channels.vi" Type="VI" URL="../helpers/Update Available Channels.vi"/>
+			<Item Name="Refresh Systems.vi" Type="VI" URL="../helpers/Refresh Systems.vi"/>
+			<Item Name="Get System Name.vi" Type="VI" URL="../helpers/Get System Name.vi"/>
+		</Item>
+		<Item Name="Package Builder" Type="Folder">
+			<Item Name="Build NIPKG.vi" Type="VI" URL="../nipkgbuilder/Build NIPKG.vi"/>
+			<Item Name="Stager.vi" Type="VI" URL="../nipkgbuilder/Stager.vi"/>
+			<Item Name="Control File.vi" Type="VI" URL="../nipkgbuilder/Control File.vi"/>
+			<Item Name="Package Name.vi" Type="VI" URL="../nipkgbuilder/Package Name.vi"/>
 		</Item>
 		<Item Name="Logging Engine.vi" Type="VI" URL="../Logging Engine.vi"/>
 		<Item Name="Logging Control.vi" Type="VI" URL="../Logging Control.vi"/>
-		<Item Name="Refresh Systems.vi" Type="VI" URL="../helpers/Refresh Systems.vi"/>
-		<Item Name="Get System Name.vi" Type="VI" URL="../helpers/Get System Name.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Error Cluster From Error Code.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Error Cluster From Error Code.vi"/>
@@ -232,6 +233,9 @@
 				<Item Name="Close (Sync).vi" Type="VI" URL="/&lt;vilib&gt;/Message/Close (Sync).vi"/>
 				<Item Name="Close (Async).vi" Type="VI" URL="/&lt;vilib&gt;/Message/Close (Async).vi"/>
 				<Item Name="Close.vi" Type="VI" URL="/&lt;vilib&gt;/Message/Close.vi"/>
+				<Item Name="Read String Values.vi" Type="VI" URL="/&lt;vilib&gt;/TagLibrary/Read String Values.vi"/>
+				<Item Name="Read Double Values.vi" Type="VI" URL="/&lt;vilib&gt;/TagLibrary/Read Double Values.vi"/>
+				<Item Name="Read Int Values.vi" Type="VI" URL="/&lt;vilib&gt;/TagLibrary/Read Int Values.vi"/>
 			</Item>
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="Build Error Cluster__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/error/error.llb/Build Error Cluster__ogtk.vi"/>
@@ -262,7 +266,7 @@
 			<Item Name="FileIngestion.dll" Type="Document" URL="FileIngestion.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Get Build Version.vi" Type="VI" URL="../ipkgbuilder/Get Build Version.vi"/>
+			<Item Name="Get App Info.vi" Type="VI" URL="../nipkgbuilder/Get App Info.vi"/>
 			<Item Name="TagLibrary.dll" Type="Document" URL="TagLibrary.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
@@ -295,8 +299,9 @@
 				<Property Name="Bld_localDestDir" Type="Path">../builds/NI_AB_PROJECTNAME/Logging Engine</Property>
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
+				<Property Name="Bld_postActionVIID" Type="Ref">/My Computer/Package Builder/Build NIPKG.vi</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{0789AAB4-FA0C-4C54-A406-A3CBE72DDD7E}</Property>
-				<Property Name="Bld_version.build" Type="Int">3</Property>
+				<Property Name="Bld_version.build" Type="Int">15</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">Application.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/Logging Engine/Application.exe</Property>
@@ -305,7 +310,7 @@
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/NI_AB_PROJECTNAME/Logging Engine/data</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Source[0].itemID" Type="Str">{65A9A643-AEA2-4B7F-814E-DE3835BB232C}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{15EC6852-0243-48DF-890C-E2E5102799C4}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Logging Control.vi</Property>
@@ -322,6 +327,46 @@
 				<Property Name="TgtF_productName" Type="Str">Logging Engine</Property>
 				<Property Name="TgtF_targetfileGUID" Type="Str">{3FF82623-E887-4CEF-BF49-4E1D97EECDAD}</Property>
 				<Property Name="TgtF_targetfileName" Type="Str">Application.exe</Property>
+			</Item>
+			<Item Name="Logging Engine Installer" Type="Installer">
+				<Property Name="Destination[0].name" Type="Str">Skyline DAQ Logger</Property>
+				<Property Name="Destination[0].parent" Type="Str">{3912416A-D2E5-411B-AFEE-B63654D690C0}</Property>
+				<Property Name="Destination[0].tag" Type="Str">{96F9E673-AE76-4400-8E89-140A8E78B432}</Property>
+				<Property Name="Destination[0].type" Type="Str">userFolder</Property>
+				<Property Name="DestinationCount" Type="Int">1</Property>
+				<Property Name="INST_author" Type="Str">NI</Property>
+				<Property Name="INST_autoIncrement" Type="Bool">true</Property>
+				<Property Name="INST_buildLocation" Type="Path">../builds/Skyline DAQ Logger/Logging Engine Installer</Property>
+				<Property Name="INST_buildLocation.type" Type="Str">relativeToCommon</Property>
+				<Property Name="INST_buildSpecName" Type="Str">Logging Engine Installer</Property>
+				<Property Name="INST_defaultDir" Type="Str">{96F9E673-AE76-4400-8E89-140A8E78B432}</Property>
+				<Property Name="INST_productName" Type="Str">Skyline DAQ Logger</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.1</Property>
+				<Property Name="InstSpecBitness" Type="Str">32-bit</Property>
+				<Property Name="InstSpecVersion" Type="Str">16008010</Property>
+				<Property Name="MSI_arpCompany" Type="Str">NI</Property>
+				<Property Name="MSI_arpURL" Type="Str">http://www.ni.com/</Property>
+				<Property Name="MSI_distID" Type="Str">{E69EF930-FE50-4D74-9575-88C3F0F0EE81}</Property>
+				<Property Name="MSI_hideNonRuntimes" Type="Bool">true</Property>
+				<Property Name="MSI_osCheck" Type="Int">0</Property>
+				<Property Name="MSI_upgradeCode" Type="Str">{93A1DA17-0E49-4DB2-8EC0-B1B0B13A6AB6}</Property>
+				<Property Name="RegDest[0].dirName" Type="Str">Software</Property>
+				<Property Name="RegDest[0].dirTag" Type="Str">{DDFAFC8B-E728-4AC8-96DE-B920EBB97A86}</Property>
+				<Property Name="RegDest[0].parentTag" Type="Str">2</Property>
+				<Property Name="RegDestCount" Type="Int">1</Property>
+				<Property Name="Source[0].dest" Type="Str">{96F9E673-AE76-4400-8E89-140A8E78B432}</Property>
+				<Property Name="Source[0].File[0].dest" Type="Str">{96F9E673-AE76-4400-8E89-140A8E78B432}</Property>
+				<Property Name="Source[0].File[0].name" Type="Str">Application.exe</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].destIndex" Type="Int">0</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].name" Type="Str">Skyline Data Logger</Property>
+				<Property Name="Source[0].File[0].Shortcut[0].subDir" Type="Str"></Property>
+				<Property Name="Source[0].File[0].ShortcutCount" Type="Int">1</Property>
+				<Property Name="Source[0].File[0].tag" Type="Str">{3FF82623-E887-4CEF-BF49-4E1D97EECDAD}</Property>
+				<Property Name="Source[0].FileCount" Type="Int">1</Property>
+				<Property Name="Source[0].name" Type="Str">Logging Engine</Property>
+				<Property Name="Source[0].tag" Type="Ref">/My Computer/Build Specifications/Logging Engine</Property>
+				<Property Name="Source[0].type" Type="Str">EXE</Property>
+				<Property Name="SourceCount" Type="Int">1</Property>
 			</Item>
 		</Item>
 	</Item>
